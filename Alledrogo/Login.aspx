@@ -76,7 +76,7 @@
             <tr>
                 <td class="auto-style7">E-mail:</td>
                 <td class="auto-style6">
-                    <asp:TextBox ID="TextBox1" runat="server" Width="154px"></asp:TextBox>
+                    <asp:TextBox ID="Email" runat="server" Width="154px"></asp:TextBox>
                 </td>
                 <td class="auto-style2">&nbsp;</td>
                 <td>&nbsp;</td>
@@ -84,7 +84,7 @@
             <tr>
                 <td class="auto-style7">Hasło:</td>
                 <td class="auto-style6">
-                    <asp:TextBox ID="TextBox2" runat="server" Width="154px"></asp:TextBox>
+                    <asp:TextBox ID="Password" runat="server" Width="154px"></asp:TextBox>
                 </td>
                 <td class="auto-style2">&nbsp;</td>
                 <td>&nbsp;</td>
@@ -98,7 +98,7 @@
             <tr>
                 <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style4">
-                    <asp:Button ID="LoginButton" runat="server" Text="Zaloguj" />
+                    <asp:Button ID="LoginButton" runat="server" Text="Zaloguj" OnClick="LoginButton_Click" />
                 </td>
                 <td class="auto-style2">&nbsp;</td>
                 <td>&nbsp;</td>
