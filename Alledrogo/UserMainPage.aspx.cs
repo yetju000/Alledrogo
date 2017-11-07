@@ -15,7 +15,7 @@ public partial class UserMainPage : System.Web.UI.Page
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["RegisterInput"].ConnectionString);
         conn.Open();
 
-        string checkbalance = "select money from users where email = '" + email + "'";
+        String checkbalance = "select money from users where email = '" + email + "'";
         SqlCommand com = new SqlCommand(checkbalance, conn);
 
         String temp = com.ExecuteScalar().ToString();
@@ -59,5 +59,19 @@ public partial class UserMainPage : System.Web.UI.Page
         {
             Response.Write("Niepoprawna kwota");
         }
+    }
+
+    protected void LogoutButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Login.aspx");
+    }
+
+    protected void AddAuction_Click(object sender, EventArgs e)
+    {
+        
+            String email = Server.UrlDecode(Request.QueryString["email"]);
+                Response.Redirect("AddItem.aspx?Email=" + email);
+
+            
     }
 }

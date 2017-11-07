@@ -42,13 +42,15 @@
         <table class="auto-style1">
             <tr>
                 <td class="auto-style7">&nbsp;</td>
-                <td class="auto-style6">&nbsp;</td>
+                <td class="auto-style6">
+                    <asp:Button ID="AddAuction" runat="server" OnClick="AddAuction_Click" Text="Dodaj aukcje" Width="90px" />
+                </td>
                 <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style8">&nbsp;</td>
-                <td class="auto-style4">Balance:<asp:TextBox ID="Balance" runat="server" OnTextChanged="Balance_TextChanged" ReadOnly="True"></asp:TextBox>
+                <td class="auto-style4">Balans:<asp:TextBox ID="Balance" runat="server" OnTextChanged="Balance_TextChanged" ReadOnly="True"></asp:TextBox>
                 </td>
                 <td>&nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="LogoutButton" runat="server" Text="Wyloguj" />
+                    <asp:Button ID="LogoutButton" runat="server" Text="Wyloguj" OnClick="LogoutButton_Click" />
                 </td>
             </tr>
             <tr>
