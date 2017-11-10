@@ -74,4 +74,34 @@ public partial class UserMainPage : System.Web.UI.Page
 
             
     }
+
+    protected void SearchButton_Click(object sender, EventArgs e)
+    {
+            String email = Server.UrlDecode(Request.QueryString["email"]);
+            Response.Redirect("Search.aspx?Email=" + email);
+    }
+
+    protected void BoughtButton_Click(object sender, EventArgs e)
+    {
+            String email = Server.UrlDecode(Request.QueryString["email"]);
+            Response.Redirect("Bought.aspx?Email=" + email);
+    }
+
+    protected void SoldButton_Click(object sender, EventArgs e)
+    {
+        String email = Server.UrlDecode(Request.QueryString["email"]);
+        Response.Redirect("Sold.aspx?Email=" + email);
+    }
+
+    protected void SoldingButton_Click(object sender, EventArgs e)
+    {
+        String email = Server.UrlDecode(Request.QueryString["email"]);
+        Response.Redirect("Solding.aspx?Email=" + email);
+    }
+
+    protected void BidButton_Click(object sender, EventArgs e)
+    {
+        String email = Server.UrlDecode(Request.QueryString["email"]);
+        Response.Redirect("Bidding.aspx?Email=" + email);
+    }
 }

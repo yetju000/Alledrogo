@@ -56,26 +56,29 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td class="auto-style2">Ilość:</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label1" runat="server" Text="Ilość:"></asp:Label>
+                </td>
                 <td>
-                    <asp:TextBox ID="Amount" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td class="auto-style2">Cena za sztuke(MAX):</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label2" runat="server" Text="Cena za sztuke:"></asp:Label>
+                </td>
                 <td>
-                    <asp:TextBox ID="PriceForOne" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td class="auto-style2">Cena początkowa:</td>
+                <td class="auto-style2">&nbsp;</td>
                 <td>
-                    <asp:TextBox ID="InitialPrice" runat="server"></asp:TextBox>
-                </td>
+                    &nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>

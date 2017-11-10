@@ -56,7 +56,7 @@
             <tr>
                 <td class="auto-style7">&nbsp;</td>
                 <td class="auto-style6">
-                    <asp:Button ID="SearchButton" runat="server" Text="Szukaj" Width="90px" />
+                    <asp:Button ID="SearchButton" runat="server" Text="Szukaj" Width="90px" OnClick="SearchButton_Click" />
                 </td>
                 <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style2">&nbsp;</td>
@@ -66,7 +66,7 @@
             <tr>
                 <td class="auto-style7">&nbsp;</td>
                 <td class="auto-style6">
-                    <asp:Button ID="BoughtButton" runat="server" Text="Kupione" Width="90px" />
+                    <asp:Button ID="BoughtButton" runat="server" Text="Kupione" Width="90px" OnClick="BoughtButton_Click" />
                 </td>
                 <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style2">&nbsp;</td>
@@ -79,7 +79,7 @@
             <tr>
                 <td class="auto-style7">&nbsp;</td>
                 <td class="auto-style6">
-                    <asp:Button ID="SoldButton" runat="server" Text="Sprzedane" Width="90px" />
+                    <asp:Button ID="SoldButton" runat="server" Text="Sprzedane" Width="90px" OnClick="SoldButton_Click" />
                 </td>
                 <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style2">&nbsp;</td>
@@ -89,7 +89,7 @@
             <tr>
                 <td class="auto-style7">&nbsp;</td>
                 <td class="auto-style6">
-                    <asp:Button ID="BidButton" runat="server" Text="Licytowane" Width="90px" />
+                    <asp:Button ID="BidButton" runat="server" Text="Licytowane" Width="90px" OnClick="BidButton_Click" />
                 </td>
                 <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style2">&nbsp;</td>
@@ -99,7 +99,7 @@
             <tr>
                 <td class="auto-style7">&nbsp;</td>
                 <td class="auto-style6">
-                    <asp:Button ID="SoldingButton" runat="server" Text="Sprzedawane" Width="90px" />
+                    <asp:Button ID="SoldingButton" runat="server" Text="Sprzedawane" Width="90px" OnClick="SoldingButton_Click" />
                 </td>
                 <td class="auto-style5">&nbsp;</td>
                 <td class="auto-style2">&nbsp;</td>
