@@ -26,12 +26,24 @@ public partial class Solding : System.Web.UI.Page
         String temp = com.ExecuteScalar().ToString();
         UserID = temp;
         conn.Close();
-
+        
+            
         SqlDataSource1.SelectCommand =
-           "SELECT I.Id, I.Image , I.Title, IP.ItemsLeft , IP.Type , IP.PriceForOne , IP.ActualPrice , IP.EndDate  FROM "+
+           "SELECT I.Id, I.Image , I.Title, IP.ItemsLeft , IP.Type ,IP.PriceForOne , IP.EndDate  FROM " +
                 "InProgress as IP "+
                 "LEFT JOIN Items as I ON I.id = IP.IdItem "+
                 "LEFT JOIN Users as U ON U.ID = I.IdSeller "+
-                "WHERE U.ID like '" + UserID + "' AND IP.EndDate >= GETDATE()";
+                "WHERE U.ID like '" + UserID + "' AND IP.EndDate >= GETDATE() AND Type = 'Kup teraz'";
+        SqlDataSource2.SelectCommand =
+           "SELECT I.Id, I.Image , I.Title , IP.Type , IP.PriceForOne as CenaWykupu , IP.ActualPrice , IP.EndDate  FROM " +
+                "InProgress as IP " +
+                "LEFT JOIN Items as I ON I.id = IP.IdItem " +
+                "LEFT JOIN Users as U ON U.ID = I.IdSeller " +
+                "WHERE U.ID like '" + UserID + "' AND IP.EndDate >= GETDATE() AND Type = 'Licytacja'";
+    }
+
+    protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+    {
+
     }
 }

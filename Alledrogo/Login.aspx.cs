@@ -6,12 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Diagnostics;
 
 public partial class Main : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+       // Process.Start(@"C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo/DatabaseTaks.exe");
     }
 
     protected void RegisterButton_Click(object sender, EventArgs e)
@@ -35,8 +36,7 @@ public partial class Main : System.Web.UI.Page
             if (temp.Equals(Password.Text))
             {
                 Response.Redirect("UserMainPage.aspx?Email=" + Email.Text);
-                Response.Redirect("UserMainPage.aspx");
-            //    Response.Write("Zalogowano pomyślnie.");
+                
             }
             
 

@@ -31,6 +31,6 @@ public partial class Bidding : System.Web.UI.Page
                 "Bought as B "+
                 "LEFT JOIN Items as I ON I.id = B.Iditem "+
                 "LEFT JOIN InProgress as IP ON IP.IdItem = I.ID "+
-                "WHERE B.IDSeller like '" + UserID + "' AND B.NumberOfItems = '0'";
+                "WHERE B.IDSeller like '" + UserID + "' AND B.NumberOfItems = '0' AND B.DATE > GetDate()";
     }
 }

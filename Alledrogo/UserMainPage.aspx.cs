@@ -9,17 +9,17 @@ using System.Configuration;
 
 public partial class UserMainPage : System.Web.UI.Page
 {
+    String email;
     protected void Page_Load(object sender, EventArgs e)
     {
-        String email = Server.UrlDecode(Request.QueryString["email"]);
+        email = Server.UrlDecode(Request.QueryString["email"]);
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["RegisterInput"].ConnectionString);
         conn.Open();
 
         String checkbalance = "select money from users where email = '" + email + "'";
         SqlCommand com = new SqlCommand(checkbalance, conn);
 
-        String temp = com.ExecuteScalar().ToString();
-        Balance.Text = temp;
+        Balance.Text = com.ExecuteScalar().ToString();
 
 
         conn.Close();
@@ -35,7 +35,7 @@ public partial class UserMainPage : System.Web.UI.Page
         try
         {
             Double Amount = Convert.ToDouble(AmountToCharge.Text);
-            String email = Server.UrlDecode(Request.QueryString["email"]);
+            
             if (Amount > 0)
             {
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["RegisterInput"].ConnectionString);

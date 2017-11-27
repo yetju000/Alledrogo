@@ -24,10 +24,10 @@ public partial class Sold : System.Web.UI.Page
 
         String temp = com.ExecuteScalar().ToString();
         UserID = temp;
-        conn.Close();
+        conn.Close(); 
 
         SqlDataSource1.SelectCommand =
-           "SELECT I.Id, I.Image , I.Title ,B.Type , B.NumberOfItems , B.Price , B.Date FROM " +
+           "SELECT I.Id, I.Image , I.Title ,B.Type ,(CASE WHEN B.NumberOfItems = 0 then 1 else B.NumberOfItems End) as NumberOfItems  , B.Price , B.Date FROM " +
                 "Bought as B " +
                 "LEFT JOIN Items as I ON I.id = B.Iditem " +
                 "LEFT JOIN Users as U ON U.ID = I.IDSeller "+
