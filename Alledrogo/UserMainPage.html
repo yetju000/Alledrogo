@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#Search').click(function () {
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                window.location = 'Search.html?token=' + token;
+            });
+
+            $('#AddItem').click(function () {
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                window.location = 'AddItem.html?token=' + token;       
+            });
+        
+            $('#Charge').click(function () {
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                var person = new Object();
+                person.Money = $('#MoneyToAdd').val();
+                $.ajax({
+                    url: 'http://localhost:1832/api/Register/',
+                    type: 'PUT',
+                    
+                    headers: {
+                        'Authorization': 'Basic ' + token
+                    },
+                    data: person,
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+                        loadData();
+                    },
+                    error: function (data, textStatus, xhr) {
+                        console.log('Error creating user');
+                    }
+                });
+            });
+
+        function loadData() {
+           
+            var token = /token=([^&]+)/.exec(window.location.href)[1];            
+
+                $.ajax({
+                    url: 'http://localhost:1832/api/Register/',
+                    type: 'GET',
+                    dataType: 'json',
+                    headers : {
+                        'Authorization' : 'Basic ' + token
+                    },
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+                       // window.location = 'UserMainPage.html?token=' + btoa(username + ':' + password);
+                        // window.location = 'Login.html';
+                        document.getElementById("Money").innerHTML ="Balans konta: "+ data[0].Money;
+                    },
+              //      complete: function (jqXHR) {
+                //        if (jqXHR.status == '401')
+                //    },
+                    error: function (data, textStatus, xhr) {
+                        console.log('Error login');
+                    }
+                });
+        };
+        window.onload = loadData();
+        });
+        
+    </script>
+    
+    <p><h1 id="Money">Balans konta: </h1></p>
+    <p><input type="text" id="MoneyToAdd" />
+    <input id="Charge" type="button" value="Doładuj" /></p>
+    <p><input id="AddItem" type="button" value="Dodaj aukcję" /></p>
+    <p><input id="Search" type="button" value="Szukaj" /></p>
+</body>
+</html>

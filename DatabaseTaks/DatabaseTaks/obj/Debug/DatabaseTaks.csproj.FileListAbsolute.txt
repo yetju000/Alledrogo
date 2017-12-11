@@ -1,0 +1,11 @@
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\bin\Debug\DatabaseTaks.exe.config
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\bin\Debug\Database.mdf
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\bin\Debug\Database_log.ldf
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\bin\Debug\DatabaseTaks.exe
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\bin\Debug\DatabaseTaks.pdb
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\obj\Debug\DatabaseTaks.csprojResolveAssemblyReference.cache
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\obj\Debug\DatabaseTaks.Form1.resources
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\obj\Debug\DatabaseTaks.Properties.Resources.resources
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\obj\Debug\DatabaseTaks.csproj.GenerateResource.Cache
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\obj\Debug\DatabaseTaks.exe
+C:\Users\Adrian\Desktop\DatabaseTaks\DatabaseTaks\obj\Debug\DatabaseTaks.pdb
