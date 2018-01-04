@@ -19,6 +19,6 @@ namespace DatabaseAccess
         public int NumberOfItems { get; set; }
         public string Type { get; set; }
         public double Price { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
     }
 }

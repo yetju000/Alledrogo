@@ -12,8 +12,8 @@ namespace Alledrogo.Controllers
 {
     public class InProgressController : ApiController
     {
-      
 
+        
         [BasicAuthentication]
         [HttpPost]
         [Route("api/InProgress/{dni}")]

@@ -14,14 +14,16 @@ namespace Alledrogo.Controllers
     
     public class RegisterController : ApiController
     {
-       
+        
+
         [BasicAuthentication]
         public HttpResponseMessage Get()
         {
+
             string username = Thread.CurrentPrincipal.Identity.Name;
             using (DatabaseEntities entities = new DatabaseEntities())
             {
-             
+                entities.Database.Connection.Open();
                 if (username!= "")
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, entities.Users.Where(e => e.Email.Equals(username)).ToList());
@@ -38,6 +40,7 @@ namespace Alledrogo.Controllers
             try {
                 using (DatabaseEntities entities = new DatabaseEntities())
                 {
+                 //   entities.Database.Connection.Open();
                     Regex rgx = new Regex("[A-Za-z0-9]+[@]{1}[A-Za-z0-9]+([.][A-Za-z0-9]+)+$");
                     user.Money = 0;
                     if (user.Name == null || user.Password == null || user.Surname == null || user.Email == null) { throw new Exception("Uzupełnij dane"); }
@@ -82,6 +85,7 @@ namespace Alledrogo.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
+        
         [BasicAuthentication]
         public HttpResponseMessage Put ([FromBody]User user)
         {

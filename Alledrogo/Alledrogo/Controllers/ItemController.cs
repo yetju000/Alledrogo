@@ -14,7 +14,7 @@ namespace Alledrogo.Controllers
 {
     public class ItemController : ApiController
     {
-
+        
         [HttpGet]
         public HttpResponseMessage Get(string exp)
         {
@@ -89,7 +89,7 @@ namespace Alledrogo.Controllers
     
         [BasicAuthentication]
         [HttpPost]
-        public HttpResponseMessage Post([FromBody] Item item,int dni)
+        public HttpResponseMessage Post([FromBody]Item item,int dni)
         {
             try
             {
@@ -101,10 +101,11 @@ namespace Alledrogo.Controllers
                         if (item.Title == null || item.Description == null) { throw new Exception("Uzupełnij dane"); }
                         var entity = entities.Users.Where(e => e.Email.Equals(username)).FirstOrDefault();
                         item.IdSeller = entity.Id;
+                        
                         entities.Items.Add(item);
                         entities.SaveChanges();
                  
-                        entities.SaveChanges();
+                       
                         
 
                        

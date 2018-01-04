@@ -4,13 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Threading;
 using System.Web.Http;
+using System.Text;
+using System.Data.SqlTypes;
 
 namespace Alledrogo.Controllers
 {
     public class BoughtController : ApiController
     {
+        
+
         [BasicAuthentication]
         [HttpPost]
         public HttpResponseMessage Post([FromBody] Bought bought,int id)
@@ -20,10 +25,13 @@ namespace Alledrogo.Controllers
                 string username = Thread.CurrentPrincipal.Identity.Name;
                 using (DatabaseEntities entities = new DatabaseEntities())
                 {
+                    
                     var entity = entities.Users.Where(e => e.Email.Equals(username)).FirstOrDefault();
                     var IP = entities.InProgresses.Where(e => e.IdItem == id).FirstOrDefault();
                     var item = entities.Items.Where(e => e.Id == id).FirstOrDefault();
+                    var userWhoSold = entities.Users.Where(e => e.Id == item.IdSeller).FirstOrDefault();
 
+                   
                     DateTime date = DateTime.Now;
                     bought.Date = date;
                     bought.IdItem = IP.IdItem;
@@ -36,6 +44,48 @@ namespace Alledrogo.Controllers
                     entities.SaveChanges();
 
                     var message = Request.CreateResponse(HttpStatusCode.Created, bought);
+
+                    try { 
+                        System.Net.Mail.SmtpClient client = new SmtpClient();
+                       // client.UseDefaultCredentials = false;
+                       // client.Credentials new System.Net.NetworkCredential("yetju000", "uughns56", "yetju000-001-site1.htempurl.com");
+                        client.Port = 587;
+                        client.Host = "smtp.gmail.com";
+                        client.EnableSsl = true;
+                        client.Timeout = 10000;
+                        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        client.UseDefaultCredentials = false;
+                        client.Credentials = new System.Net.NetworkCredential("ProjektAlledrogo@gmail.com", "wchujdrogo");
+
+                        MailMessage mm = new MailMessage("donotreply@domain.com", entity.Email, "Alledrogo - Zakupione przedmioty",
+                         "Kupiłeś przedmiot[y] '" + item.Title + "'. Id aukcji:" + item.Id + "! Sztuk:" + bought.NumberOfItems + " Cena : " + bought.Price);
+                        mm.BodyEncoding = UTF8Encoding.UTF8;
+                        mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+                        client.Send(mm);
+
+
+                        client = new SmtpClient();
+                        client.Port = 587;
+                        client.Host = "smtp.gmail.com";
+                        client.EnableSsl = true;
+                        client.Timeout = 10000;
+                        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        client.UseDefaultCredentials = false;
+                        client.Credentials = new System.Net.NetworkCredential("ProjektAlledrogo@gmail.com", "wchujdrogo");
+
+                        mm = new MailMessage("donotreply@domain.com", userWhoSold.Email, "Alledrogo - Sprzedane przedmioty",
+                         "Sprzedałeś przedmiot[y] '" + item.Title + "'. Id aukcji:" + item.Id + "! Sztuk:" + bought.NumberOfItems + " Cena : " + bought.Price);
+                        mm.BodyEncoding = UTF8Encoding.UTF8;
+                        mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+                        client.Send(mm);
+                    }
+                    catch (Exception exx)
+                    {
+                        
+                    }
+
                     return message;
                 }
             }

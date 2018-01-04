@@ -19,6 +19,6 @@ namespace DatabaseAccess
         public string Type { get; set; }
         public Nullable<double> PriceForOne { get; set; }
         public Nullable<double> ActualPrice { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public System.DateTime EndDate { get; set; }
     }
 }

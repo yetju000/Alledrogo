@@ -92,3 +92,5 @@ C:\Users\Adrian\Documents\Alledrogo\Alledrogo\Alledrogo\bin\Database.mdf
 C:\Users\Adrian\Documents\Alledrogo\Alledrogo\Alledrogo\bin\Database_log.ldf
 C:\Users\Adrian\Documents\Alledrogo\Alledrogo\Alledrogo\bin\DatabaseAccess.dll
 C:\Users\Adrian\Documents\Alledrogo\Alledrogo\Alledrogo\bin\DatabaseAccess.pdb
+C:\Users\Adrian\Documents\Alledrogo\Alledrogo\Alledrogo\obj\Debug\Alledrogo.Properties.Resources.resources
+C:\Users\Adrian\Documents\Alledrogo\Alledrogo\Alledrogo\obj\Debug\Alledrogo.csproj.GenerateResource.Cache
