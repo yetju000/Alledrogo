@@ -40,7 +40,8 @@ namespace Alledrogo.Controllers
                     bought.NumberOfItems = Convert.ToInt32(bought.NumberOfItems);
                     bought.Price = Convert.ToDouble(bought.Price);
                     entity.Money = entity.Money - bought.Price;
-                       entities.Boughts.Add(bought);
+                    userWhoSold.Money = userWhoSold.Money - bought.Price;
+                    entities.Boughts.Add(bought);
                     entities.SaveChanges();
 
                     var message = Request.CreateResponse(HttpStatusCode.Created, bought);

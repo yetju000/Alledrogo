@@ -35,3 +35,15 @@ C:\Users\Adrian\Desktop\Nowy folder (4)\Alledrogo\DatabaseAccess\bin\Debug\Entit
 C:\Users\Adrian\Desktop\Nowy folder (4)\Alledrogo\DatabaseAccess\obj\Debug\DatabaseAccess.csprojResolveAssemblyReference.cache
 C:\Users\Adrian\Desktop\Nowy folder (4)\Alledrogo\DatabaseAccess\obj\Debug\DatabaseAccess.dll
 C:\Users\Adrian\Desktop\Nowy folder (4)\Alledrogo\DatabaseAccess\obj\Debug\DatabaseAccess.pdb
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Debug\Database.mdf
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Debug\Database_log.ldf
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Debug\DatabaseAccess.dll.config
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Debug\DatabaseAccess.dll
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Debug\DatabaseAccess.pdb
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Debug\EntityFramework.dll
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Debug\EntityFramework.xml
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\obj\Debug\DatabaseAccess.csprojResolveAssemblyReference.cache
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\obj\Debug\DatabaseAccess.dll
+C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\obj\Debug\DatabaseAccess.pdb

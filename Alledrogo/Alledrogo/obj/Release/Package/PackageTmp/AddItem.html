@@ -52,8 +52,12 @@
             var c = document.getElementById("myCanvas");
             c.style.visibility = "hidden";
             var ctx = c.getContext("2d");
-            var img = document.getElementById("blah");
-            ctx.drawImage(img, 0, 0, 200, 200);
+            
+                var img = document.getElementById("blah");
+            
+            if (img.src) {
+                ctx.drawImage(img, 0, 0, 200, 200);
+            }
             //  alert(c.toDataURL());
             if (rodzaj == "Kup") {
                 item.Title = $('#Title').val();
@@ -217,7 +221,7 @@
     <div class="row" style=" padding-bottom: 1%;">
 
         <div class="col-sm-4 col-md-5"></div>
-        <div class="col-sm-4 col-md-4"> <img id="blah" src="#"  alt="your image" /></div>
+        <div class="col-sm-4 col-md-4"> <img id="blah" src="Img/no-image.jpg"  alt="your image" /></div>
         <div class="col-sm-4 col-md-3"></div>
     </div>
 
