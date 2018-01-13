@@ -2,7 +2,10 @@
 <html>
 <head>
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Content/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="Content/style.css" type="text/css" />
     <script src="Scripts/jquery-1.10.2.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -20,7 +23,7 @@
                     dataType: 'json',
                     data: person,
                     success: function (data, textStatus, xhr) {
-                        
+
                         window.location = 'Login.html'
                     },
                     error: function (data, textStatus, xhr) {
@@ -33,10 +36,51 @@
     </script>
 </head>
 <body>
-    Imie:     <input type="text" id="Name"><br>
-    Nazwisko: <input type="text" id="Surname"><br>
-    Email:    <input type="text" id="Email"><br>
-    Hasło:    <input type="password" id="Password"><br>
-    <input id="register" type="submit" value="Zarejestruj się" />
+    <div class="row" style="padding-top: 20%; padding-bottom: 3%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4 img-responsive" style="padding-left:5%"><img src="../Img/ikona_burned.png" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><b>Imie:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    </b><input type="text" id="Name"></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style="padding-bottom: 1%;">
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><b>Nazwisko: </b><input type="text" id="Surname"></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row"  style="padding-bottom: 1%;">
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4">
+            <b> Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  </b>  <input type="text" id="Email">
+        </div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row"  style="padding-bottom: 1%;">
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4">
+            <b>Hasło:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   </b> <input type="password" id="Password">
+        </div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4">
+            <input id="register" type="submit" value="Zarejestruj się" style="margin-left:15%;" class="btn btn-primary" />
+        </div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+
+    
 </body>
 </html>

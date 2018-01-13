@@ -2,13 +2,19 @@
 <html>
 <head>
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Content/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="Content/lista.css" type="text/css">
+
 </head>
+
 <body>
+
     <script src="Scripts/jquery-1.10.2.js"></script>
     <script type="text/javascript">
-        
-        
+
+
 
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -17,8 +23,8 @@
                 reader.onload = function (e) {
                     $('#blah')
                         .attr('src', e.target.result)
-                        .width(100)
-                        .height(100);
+                        .width(200)
+                        .height(200);
                 };
 
                 reader.readAsDataURL(input.files[0]);
@@ -27,7 +33,7 @@
 
         function zmiana(selectObject) {
             var x = selectObject.value;
-            
+
             if (x == "Kup") {
                 document.getElementById("1").innerHTML = "Ilość:";
                 document.getElementById("2").innerHTML = "Cena za sztuke:";
@@ -47,19 +53,19 @@
             c.style.visibility = "hidden";
             var ctx = c.getContext("2d");
             var img = document.getElementById("blah");
-            ctx.drawImage(img, 0, 0, 100, 100);
-          //  alert(c.toDataURL());
+            ctx.drawImage(img, 0, 0, 200, 200);
+            //  alert(c.toDataURL());
             if (rodzaj == "Kup") {
                 item.Title = $('#Title').val();
                 item.Description = $('#Description').val();
                 item.Image = c.toDataURL();
-                
+
             }
             else {
                 item.Title = $('#Title').val();
                 item.Description = $('#Description').val();
                 item.Image = c.toDataURL();
-                
+
             }
             return $.ajax({
                 url: '/api/Item?dni=' + $('#Dni').val(),
@@ -70,12 +76,12 @@
                     'Authorization': 'Basic ' + token
                 },
                 success: function (data, textStatus, xhr) {
-                   //  console.log(data);
-                    
-                  //  PostInProgress(InProgress);
+                    //  console.log(data);
+
+                    //  PostInProgress(InProgress);
                 },
                 error: function (data, textStatus, xhr) {
-                  //  console.log('Error creating user');
+                    //  console.log('Error creating user');
                     //   window.location = 'AddItem.html';
                     alert(data.responseJSON.ExceptionMessage);
                 }
@@ -86,22 +92,22 @@
             var token = /token=([^&]+)/.exec(window.location.href)[1];
             var InProgress = new Object();
             var rodzaj = document.getElementById("Aukcja").value;
-            
+
             //InProgress.EndDate = document.getElementById("Dni").value;
-            if (rodzaj == "Kup") {          
-                InProgress.ItemsLeft = $('#IloscCP').val();  
+            if (rodzaj == "Kup") {
+                InProgress.ItemsLeft = $('#IloscCP').val();
                 InProgress.Type = "Kup teraz";
                 InProgress.PriceForOne = $('#PriceCW').val();
-                InProgress.ActualPrice = "0";             
+                InProgress.ActualPrice = "0";
             }
             else {
                 InProgress.ItemsLeft = "1";
                 InProgress.Type = "Licytacja";
                 InProgress.PriceForOne = $('#PriceCW').val();
-                InProgress.ActualPrice = $('#IloscCP').val();           
+                InProgress.ActualPrice = $('#IloscCP').val();
             }
             $.ajax({
-                url: '/api/InProgress/'+document.getElementById("Dni").value,
+                url: '/api/InProgress/' + document.getElementById("Dni").value,
                 type: 'POST',
                 dataType: 'json',
                 data: InProgress,
@@ -109,56 +115,122 @@
                     'Authorization': 'Basic ' + token
                 },
                 success: function (data, textStatus, xhr) {
-                
+
 
                     window.location = 'UserMainPage.html?token=' + token;
                 },
                 error: function (data, textStatus, xhr) {
-                    
+
                     alert(data.responseJSON.ExceptionMessage);
                 }
 
             });
         }
-       
+
         $(document).ready(function () {
             $('#submit').click(function () {
                 document.getElementById("submit").disabled = true;
-               
+
                 $.when(PostItem()).done(function (a1) {
                     PostInProgress()
                 });
-                document.getElementById("submit").disabled = false; 
+                document.getElementById("submit").disabled = false;
             });
         });
         window.onbeforeunload = null;
     </script>
-    <p>Typ aukcji:
-        <select id="Aukcja" onchange="zmiana(this)">
-            <option value="Kup">Kup teraz</option>
-            <option value="Licytuj">Licytacja</option>
-        </select>
-    </p>
-    <p>Tytuł:<input id="Title" type="text" /></p>
-    <p>Opis:<input id="Description" type="text" /></p>
-    <p><label id="1">Ilość</label><input id="IloscCP" type="text" /></p>
-    <p><label id="2">Cena za sztuke</label><input id="PriceCW" type="text" /></p>
-    <p>Ilość dni:
-        <select id="Dni">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-        </select>
-    </p>
-    <p>
-        <input type='file' accept="image/*" onchange="readURL(this);" />
-        <img id="blah" src="#" width="50" height="50" alt="your image" />
-        <canvas id="myCanvas" />
-    </p>
-    <input id="submit" type="button" value="Dodaj" />
+
+    <div class="row" style="padding-top: 5%; padding-bottom: 3%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4 img-responsive" style="padding-left:5%"><img src="../Img/ikona_burned.png" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-4"></div>
+        <div class="col-sm-4 col-md-4">
+            Typ aukcji:
+            <select id="Aukcja" class="form-control" onchange="zmiana(this)">
+                <option value="Kup">Kup teraz</option>
+                <option value="Licytuj">Licytacja</option>
+            </select>
+        </div>
+        <div class="col-sm-4 col-md-4"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-4"></div>
+        <div class="col-sm-4 col-md-4">Tytuł:<input id="Title" type="text" class="form-control" /></div>
+        <div class="col-sm-4 col-md-4"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-4"></div>
+        <div class="col-sm-4 col-md-4">Opis:<input id="Description" type="text" class="form-control" /></div>
+        <div class="col-sm-4 col-md-4"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-4"></div>
+        <div class="col-sm-4 col-md-4"><label id="1">Ilość</label><input id="IloscCP" type="text" class="form-control" /></div>
+        <div class="col-sm-4 col-md-4"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-4"></div>
+        <div class="col-sm-4 col-md-4"><label id="2">Cena za sztuke</label><input id="PriceCW" type="text" class="form-control" /></div>
+        <div class="col-sm-4 col-md-4"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-4"></div>
+        <div class="col-sm-4 col-md-4">
+            Ilość dni:
+            <select id="Dni" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+
+        </div>
+        <div class="col-sm-4 col-md-4"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><input type="file" class="custom-file-input" accept="image/*" onchange="readURL(this);" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"> <img id="blah" src="#"  alt="your image" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><input id="submit" type="button" value="Dodaj" class="btn btn-primary btn-lg" style="text-align:center; width:200px" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <canvas id="myCanvas" />
+
+
 </body>
 </html>
