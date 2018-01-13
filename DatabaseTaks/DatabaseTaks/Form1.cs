@@ -24,10 +24,10 @@ namespace DatabaseTaks
             if (currentSecond == 0)
             {
 
-                SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\App_Data\Database.mdf;Integrated Security=True");
+                SqlConnection conn = new SqlConnection(@"Data Source=sql6003.site4now.net;Initial Catalog=DB_A30CD6_AData;User ID=DB_A30CD6_AData_admin;Password=uughns56");
                 conn.Open();
 
-                string DeleteInProgress = "DELETE FROM InProgress where EndDate < GetDATE() AND NOT type = 'Licytacja'";
+                string DeleteInProgress = "DELETE FROM InProgress where EndDate <= GetDATE() AND NOT type = 'Licytacja'";
                 SqlCommand com = new SqlCommand(DeleteInProgress, conn);
 
                 com.ExecuteNonQuery();
@@ -42,7 +42,7 @@ namespace DatabaseTaks
                 "LEFT JOIN Items as I ON I.ID = IP.IdItem "+
                 "LEFT JOIN Bought as B ON B.IdItem = I.Id "+
                 "LEFT JOIN Users as U ON B.IDSeller = U.ID "+
-                "WHERE EndDate < GetDATE() AND IP.type LIKE 'LICYTACJA'";
+                "WHERE EndDate <= GetDATE() AND IP.type LIKE 'LICYTACJA'";
 
 
 
@@ -84,7 +84,8 @@ namespace DatabaseTaks
 
                 for (int i = 0; i < ilosc; i++)
                 {
-                    if ((ilosc>0) && (!Email[i].Equals("NULL"))) { 
+                    if ((ilosc>0) && (!Email[i].Equals("NULL"))) {
+                        try {  
                     SmtpClient client = new SmtpClient();
                     client.Port = 587;
                     client.Host = "smtp.gmail.com";
@@ -94,11 +95,16 @@ namespace DatabaseTaks
                     client.UseDefaultCredentials = false;
                     client.Credentials = new System.Net.NetworkCredential("ProjektAlledrogo@gmail.com", "wchujdrogo");
 
-                    //MailMessage mm = new MailMessage("donotreply@domain.com", Email[i], "Licytacja zakończona", "Wygrałeś aukcje '"+Title[i]+"'. Id aukcji:"+IdItem[i]+"! Ostateczna cena:"+ Price[i]+". Gratulacje!");
-                   // mm.BodyEncoding = UTF8Encoding.UTF8;
-                   // mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                  //  MailMessage mm = new MailMessage("donotreply@domain.com", Email[i], "Licytacja zakończona", "Wygrałeś aukcje '"+Title[i]+"'. Id aukcji:"+IdItem[i]+"! Ostateczna cena:"+ Price[i]+". Gratulacje!");
+                  //  mm.BodyEncoding = UTF8Encoding.UTF8;
+                  //  mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
                   //  client.Send(mm);
+                        }
+                        catch (Exception Exc)
+                        {
+
+                        }
                      }
                     }
                 if (ilosc > 0)

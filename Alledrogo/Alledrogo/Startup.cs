@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
+
 [assembly: OwinStartup(typeof(Alledrogo.Startup))]
 
 namespace Alledrogo
@@ -13,6 +14,7 @@ namespace Alledrogo
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            
         }
     }
 }

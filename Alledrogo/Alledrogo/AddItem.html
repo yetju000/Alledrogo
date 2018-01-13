@@ -47,19 +47,29 @@
             c.style.visibility = "hidden";
             var ctx = c.getContext("2d");
             var img = document.getElementById("blah");
+            if (img != null)
             ctx.drawImage(img, 0, 0, 100, 100);
           //  alert(c.toDataURL());
             if (rodzaj == "Kup") {
                 item.Title = $('#Title').val();
                 item.Description = $('#Description').val();
+                if (c.toDataURL() != null) {
                 item.Image = c.toDataURL();
-                
+                }
+                else {
+                    item.Image = "";
+                }
             }
             else {
                 item.Title = $('#Title').val();
                 item.Description = $('#Description').val();
                 item.Image = c.toDataURL();
-                
+                if (c.toDataURL() != null) {
+                item.Image = c.toDataURL();
+                }
+                else {
+                    item.Image = "";
+                }
             }
             return $.ajax({
                 url: '/api/Item?dni=' + $('#Dni').val(),
@@ -156,7 +166,7 @@
     </p>
     <p>
         <input type='file' accept="image/*" onchange="readURL(this);" />
-        <img id="blah" src="#" width="50" height="50" alt="your image" />
+        <img id="blah" src="" width="50" height="50" alt="your image" />
         <canvas id="myCanvas" />
     </p>
     <input id="submit" type="button" value="Dodaj" />
