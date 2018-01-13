@@ -10,6 +10,7 @@ C:\Users\Adrian\Documents\Alledrogo\Alledrogo\DatabaseAccess\bin\Release\EntityF
 C:\Users\Adrian\Documents\Alledrogo\Alledrogo\DatabaseAccess\obj\Release\DatabaseAccess.csprojResolveAssemblyReference.cache
 C:\Users\Adrian\Documents\Alledrogo\Alledrogo\DatabaseAccess\obj\Release\DatabaseAccess.dll
 C:\Users\Adrian\Documents\Alledrogo\Alledrogo\DatabaseAccess\obj\Release\DatabaseAccess.pdb
+<<<<<<< HEAD
 C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Release\Database.mdf
 C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Release\Database_log.ldf
 C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Release\DatabaseAccess.dll.config
@@ -22,3 +23,18 @@ C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\bin\Release
 C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\obj\Release\DatabaseAccess.csprojResolveAssemblyReference.cache
 C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\obj\Release\DatabaseAccess.dll
 C:\Users\Adrian\Desktop\ALLEDROGO\Alledrogo\Alledrogo\DatabaseAccess\obj\Release\DatabaseAccess.pdb
+=======
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\bin\Release\Database.mdf
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\bin\Release\Database_log.ldf
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\bin\Release\DatabaseAccess.dll.config
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\bin\Release\DatabaseAccess.dll
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\bin\Release\DatabaseAccess.pdb
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\bin\Release\EntityFramework.dll
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\bin\Release\EntityFramework.xml
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\obj\Release\DatabaseAccess.csprojResolveAssemblyReference.cache
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\obj\Release\DatabaseAccess.csproj.CoreCompileInputs.cache
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\obj\Release\DatabaseAccess.dll
+C:\Users\alekru\Downloads\Alledrogo-master\Alledrogo-master\Alledrogo\DatabaseAccess\obj\Release\DatabaseAccess.pdb
+>>>>>>> e0b64c6faf7c0f1e78021f1fab6064b60c7378ab

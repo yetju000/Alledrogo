@@ -2,7 +2,10 @@
 <html>
 <head>
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Content/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="Content/lista.css" type="text/css">
 </head>
 <body>
     <script src="Scripts/jquery-1.10.2.js"></script>
@@ -21,10 +24,10 @@
                     ulItems.empty();
                     var i = 1;
                     $.each(data, function (index, val) {
-                        var I =  val.I.Title  ;
-                        var IP = val.IP.ItemsLeft + ' ' +val.IP.PrifeForOne + ' ' +val.IP.ActualPrice + ' ' +val.IP.Type + ' ' +val.IP.EndDate ;
-                        
-                        
+                        var I = val.I.Title;
+                        var IP = val.IP.ItemsLeft + ' ' + val.IP.PrifeForOne + ' ' + val.IP.ActualPrice + ' ' + val.IP.Type + ' ' + val.IP.EndDate;
+
+
                         ulItems.append('<li><canvas id="' + i + '" width="100" height="100"/> ' + I + ' ' + IP + '</li>');
                         var canvas = document.getElementById(i);
                         var ctx = canvas.getContext("2d");
@@ -42,11 +45,12 @@
             });
         }
         $(document).ready(function () {
-           window.onload = load();
-           
+            window.onload = load();
+
         });
 
     </script>
+    <img src="../Img/ikona_burned.png" style="margin-top:30px; margin-left:100px" />
     <ul id="List" />
 </body>
 </html>
