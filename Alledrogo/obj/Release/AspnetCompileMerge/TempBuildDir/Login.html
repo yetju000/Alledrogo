@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#login').click(function () {
+                var username = $('#txtUsername').val();
+                var password = $('#txtPassword').val();
+                
+                $.ajax({
+                    url: '/api/Register/',
+                    type: 'GET',
+                    dataType: 'json',
+                    headers : {
+                        'Authorization' : 'Basic ' + btoa(username + ':' +password)
+                    },
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+                        window.location = 'UserMainPage.html?token=' + btoa(username + ':' + password);
+                        
+                        
+                    },
+             
+                    error: function (data, textStatus, xhr) {
+                        alert("Niepoprawna nazwa użytkownika bądź hasło");
+                    }
+                });
+            });
+        });
+        window.onbeforeunload = null;
+    </script>
+</head>
+<body>
+    
+
+    Email : <input type="text" id="txtUsername" />
+    Password : <input type="password" id="txtPassword" />
+    <input id="login" type="button" value="Zaloguj się" />
+    <input id="register" type="submit" value="Zarejestruj się" onclick="window.location='Register.html'" />
+</body>
+</html>

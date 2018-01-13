@@ -1,0 +1,389 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Content/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="Content/lista.css" type="text/css">
+</head>
+<body>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+
+
+
+
+        function GetItem() {
+            var token = /token=([^&]+)/.exec(window.location.href)[1];
+            var arr = document.URL.match(/id=([0-9]+)/)
+            var id = arr[1];
+
+            $.ajax({
+                url: '/api/Register/',
+                type: 'GET',
+                dataType: 'json',
+
+                headers: {
+                    'Authorization': 'Basic ' + token
+                },
+                success: function (data, textStatus, xhr) {
+                    //  console.log(data);
+                    document.getElementById("Money").innerHTML = data[0].Money;
+                    document.getElementById("idBuyer").innerHTML = data[0].Id;
+
+                },
+                error: function (data, textStatus, xhr) {
+                    // console.log('Error creating user');
+                    //   window.location = 'AddItem.html';
+                }
+
+            });
+
+            $.ajax({
+                url: '/api/ItemList/Item/' + id,
+                type: 'GET',
+                dataType: 'json',
+
+                headers: {
+                    'Authorization': 'Basic ' + token
+                },
+                success: function (data) {
+
+                    $.each(data, function (index, val) {
+
+
+                        var Title = val.I.Title;
+                        var IdItem = val.I.Id;
+                        var Description = val.I.Description;
+                        var IdSeller = val.I.IdSeller;
+                        var ItemsLeft = val.IP.ItemsLeft;
+                        var Type = val.IP.Type;
+                        var PriceForOne = val.IP.PriceForOne;
+                        var ActualPrice = val.IP.ActualPrice;
+                        var EndDate = val.IP.EndDate;
+
+                        var canvas = document.getElementById("c");
+                        var ctx = canvas.getContext("2d");
+
+                        var image = new Image();
+                        image.onload = function () {
+                            ctx.drawImage(image, 0, 0);
+                        };
+                        image.src = val.I.Image;
+                        document.getElementById("IdItem").innerHTML = "ID Przedmiotu: " + IdItem;
+                        document.getElementById("IdSeller").innerHTML = IdSeller;
+
+                        document.getElementById("Title").innerHTML = "Tytuł: " + Title;
+                        document.getElementById("Description").innerHTML = "Opis: " + Description;
+                        document.getElementById("Type").innerHTML = Type;
+                        document.getElementById("EndDate").innerHTML = "Data końca aukcji: " + EndDate;
+                        if (Type == 'Licytacja') {
+                            document.getElementById("ItemsLeftCP").innerHTML = ActualPrice;
+                            document.getElementById("AT").innerHTML = "Kwota: ";
+                            document.getElementById("Left").innerHTML = "Cena aktualna :";
+                            if (PriceForOne > 0) {
+                                document.getElementById("PriceForOneCW").innerHTML = PriceForOne;
+                                document.getElementById("Max").innerHTML = "Cena wykupu :";
+                            }
+                            else {
+                                document.getElementById("PriceForOneCW").innerHTML = "";
+                                document.getElementById("Max").innerHTML = "";
+                            }
+                        }
+                        else {
+                            document.getElementById("ItemsLeftCP").innerHTML = ItemsLeft;
+                            document.getElementById("PriceForOneCW").innerHTML = PriceForOne;
+                            document.getElementById("AT").innerHTML = "Ilość: ";
+                            document.getElementById("Left").innerHTML = "Pozostało sztuk:";
+                            document.getElementById("Max").innerHTML = "Cena(szt):";
+                        }
+                    });
+                },
+                error: function (data, textStatus, xhr) {
+
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            GetItem();
+            $('#submit').click(function () {
+                document.getElementById("submit").disabled = true;
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                var AuctionType = document.getElementById("Type").innerHTML;
+                var money = document.getElementById("Money").innerHTML
+                var HowManyWant = $('#HowMany').val();
+                var HowManyIs = document.getElementById("ItemsLeftCP").innerHTML;
+                var PriceForOne = document.getElementById("PriceForOneCW").innerHTML;
+
+
+
+                var idSeller = document.getElementById("IdSeller").innerHTML;
+                var arr = document.URL.match(/id=([0-9]+)/);
+                var id = arr[1];
+
+
+                //!=
+                if ((AuctionType == "Kup teraz") && (money >= (PriceForOne * HowManyWant)) && (idSeller != document.getElementById("idBuyer").innerHTML) && (HowManyWant <= HowManyIs)) {
+                    var bought = new Object();
+                    bought.Price = PriceForOne * HowManyWant;
+                    bought.NumberOfItems = HowManyWant;
+                    var InProgress = new Object();
+                    InProgress.ItemsLeft = HowManyWant;
+                    if (HowManyWant == HowManyIs) {
+                        $.ajax({
+                            url: '/api/Bought/' + id,
+                            type: 'POST',
+                            dataType: 'json',
+                            data: bought,
+                            headers: {
+                                'Authorization': 'Basic ' + token
+                            },
+                            success: function (data, textStatus, xhr) {
+                                $.ajax({
+                                    url: '/api/Item/' + id,
+                                    type: 'DELETE',
+                                    dataType: 'json',
+
+                                    headers: {
+                                        'Authorization': 'Basic ' + token
+                                    },
+                                    success: function (data, textStatus, xhr) {
+                                        //  console.log(data);
+                                        window.location = 'UserMainPage.html?token=' + token;
+
+                                    },
+                                    error: function (data, textStatus, xhr) {
+                                        //       console.log('Error creating user');
+                                        //   window.location = 'AddItem.html';
+                                    }
+
+                                });
+
+                            },
+                            error: function (data, textStatus, xhr) {
+                                console.log('Error creating user');
+                                //   window.location = 'AddItem.html';
+                            }
+
+                        });
+                    }
+                    else if (HowManyWant < HowManyIs) {
+                        $.ajax({
+                            url: '/api/Bought/' + id,
+                            type: 'POST',
+                            dataType: 'json',
+                            data: bought,
+                            headers: {
+                                'Authorization': 'Basic ' + token
+                            },
+                            success: function (data, textStatus, xhr) {
+                                $.ajax({
+                                    url: '/api/Item/' + id,
+                                    type: 'PUT',
+                                    dataType: 'json',
+                                    data: InProgress,
+                                    headers: {
+                                        'Authorization': 'Basic ' + token
+                                    },
+                                    success: function (data, textStatus, xhr) {
+                                        window.location = 'UserMainPage.html?token=' + token;
+
+                                    },
+                                    error: function (data, textStatus, xhr) {
+                                        alert("Coś poszło nie tak...");
+                                    }
+
+                                });
+
+                            },
+                            error: function (data, textStatus, xhr) {
+                                alert("Coś poszło nie tak...");
+                            }
+
+                        });
+                    }
+
+                }
+                else if ((AuctionType == "Licytacja") && (parseInt(money) > parseInt(HowManyIs)) && (idSeller != document.getElementById("idBuyer").innerHTML)) {
+
+                    if ((HowManyWant == PriceForOne) && (PriceForOne != 0)) {
+                        var bought = new Object();
+                        bought.Price = PriceForOne;
+                        bought.NumberOfItems = 1;
+                        $.ajax({
+                            url: '/api/Bought/' + id,
+                            type: 'POST',
+                            dataType: 'json',
+                            data: bought,
+                            headers: {
+                                'Authorization': 'Basic ' + token
+                            },
+                            success: function (data, textStatus, xhr) {
+                                $.ajax({
+                                    url: '/api/Item/' + id,
+                                    type: 'DELETE',
+                                    dataType: 'json',
+
+                                    headers: {
+                                        'Authorization': 'Basic ' + token
+                                    },
+                                    success: function (data, textStatus, xhr) {
+                                        window.location = 'UserMainPage.html?token=' + token;
+
+                                    },
+                                    error: function (data, textStatus, xhr) {
+                                        alert("Coś poszło nie tak...");
+                                    }
+
+                                });
+
+                            },
+                            error: function (data, textStatus, xhr) {
+                                alert("Coś poszło nie tak...");
+                            }
+
+                        });
+                    }
+                    else if (HowManyWant > HowManyIs) {
+                        var bought = new Object();
+                        bought.Price = HowManyWant;
+                        bought.NumberOfItems = 0;
+                        var IP = new Object();
+                        IP.ActualPrice = HowManyWant;
+                        var InProgress = new Object();
+                        InProgress.ActualPrice = HowManyWant;
+                        $.ajax({
+                            url: '/api/Bought/' + id,
+                            type: 'POST',
+                            dataType: 'json',
+                            data: bought,
+                            headers: {
+                                'Authorization': 'Basic ' + token
+                            },
+                            success: function (data, textStatus, xhr) {
+                                $.ajax({
+                                    url: '/api/Item/' + id,
+                                    type: 'PUT',
+                                    dataType: 'json',
+                                    data: InProgress,
+                                    headers: {
+                                        'Authorization': 'Basic ' + token
+                                    },
+                                    success: function (data, textStatus, xhr) {
+                                        window.location = 'UserMainPage.html?token=' + token;
+
+
+                                    },
+                                    error: function (data, textStatus, xhr) {
+
+                                        alert("Coś poszło nie tak...");
+                                    }
+
+                                });
+
+                            },
+                            error: function (data, textStatus, xhr) {
+
+                                alert("Coś poszło nie tak...");
+                            }
+
+                        });
+                    }
+
+                }
+                else {
+                    alert("Niepoprawne dane");
+                }
+
+                document.getElementById("submit").disabled = false;
+            });
+        });
+        window.onbeforeunload = null;
+    </script>
+
+    <div class="row" style="padding-top: 5%; padding-bottom: 3%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4 img-responsive" style="padding-left:5%"><img src="../Img/ikona_burned.png" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><b>Dostępne środki: <b /><label id="Money"></label></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><label id="IdItem"></label></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><canvas id="c" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><label id="Title"></label></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><label id="Description"></label></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><label id="Type"></label></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><label id="Left"></label><label id="ItemsLeftCP"></label></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><label id="Max"></label><label id="PriceForOneCW"></label></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><label id="EndDate"></label></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><label id="AT"></label><input id="HowMany" type="text" class="form-control" /><input id="submit" type="button" class="btn btn-primary" value="Akceptuj" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <label id="idBuyer" hidden></label>
+    <label id="IdSeller" hidden></label>
+
+
+</body>
+</html>

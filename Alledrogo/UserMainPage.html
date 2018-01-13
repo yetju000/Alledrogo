@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Content/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="Content/style.css" type="text/css" />
+</head>
+<body>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#Search').click(function () {
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                window.location = 'Search.html?token=' + token;
+            });
+
+            $('#AddItem').click(function () {
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                window.location = 'AddItem.html?token=' + token;
+            });
+            $('#Solding').click(function () {
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                window.location = 'Solding.html?token=' + token;
+            });
+            $('#Sold').click(function () {
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                window.location = 'Sold.html?token=' + token;
+            });
+            $('#Bought').click(function () {
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                window.location = 'Bought.html?token=' + token;
+            });
+            $('#Licytation').click(function () {
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                window.location = 'Licytation.html?token=' + token;
+            });
+            $('#Logout').click(function () {
+
+                window.location = 'Login.html';
+            });
+            window.onbeforeunload = function (evt) {
+                var message = 'Are you sure you want to leave?';
+                if (typeof evt == 'undefined') {
+                    evt = window.event;
+                }
+                if (evt) {
+                    evt.returnValue = message;
+                }
+                return message;
+            }
+
+            $('#Charge').click(function () {
+                document.getElementById("Charge").disabled = true;
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+                var person = new Object();
+                person.Money = $('#MoneyToAdd').val();
+                $.ajax({
+                    url: '/api/Register/',
+                    type: 'PUT',
+
+                    headers: {
+                        'Authorization': 'Basic ' + token
+                    },
+                    data: person,
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+                        loadData();
+                    },
+                    error: function (data, textStatus, xhr) {
+                        alert(data.responseJSON.Message);
+                    }
+                });
+                document.getElementById("Charge").disabled = false;
+            });
+
+            function loadData() {
+
+                var token = /token=([^&]+)/.exec(window.location.href)[1];
+
+                $.ajax({
+                    url: '/api/Register/',
+                    type: 'GET',
+                    dataType: 'json',
+                    headers: {
+                        'Authorization': 'Basic ' + token
+                    },
+                    success: function (data, textStatus, xhr) {
+                        console.log(data);
+
+                        document.getElementById("Money").innerHTML = "Balans konta: " + data[0].Money;
+                    },
+
+                    error: function (data, textStatus, xhr) {
+                        console.log('Coś poszło nie tak...');
+                    }
+                });
+            };
+            window.onload = loadData();
+            window.onbeforeunload = null;
+        });
+
+    </script>
+
+    <div class="row" style="padding-top: 5%; padding-bottom: 3%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4 img-responsive" style="padding-left:5%"><img src="../Img/ikona_burned.png" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-4"></div>
+        <div class="col-sm-4 col-md-4"><h1 id="Money" style="color:orangered;font-weight:bold">Balans konta: </h1></div>
+        <div class="col-sm-4 col-md-4"></div>
+
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-4"></div>
+        <div class="col-sm-4 col-md-4"><input type="text" id="MoneyToAdd" class="form-control" /></div>
+        <div class="col-sm-4 col-md-4"><input id="Charge" type="button" value="Doładuj" class="btn btn-primary" /></div>
+
+    </div>
+
+
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><input id="AddItem" type="button" value="Dodaj aukcję" class="btn btn-primary btn-lg" style="text-align:center; width:200px" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><input id="Search" type="button" value="Szukaj" class="btn btn-primary btn-lg" style="text-align:center; width:200px" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><input id="Solding" type="button" value="Sprzedawane" class="btn btn-primary btn-lg" style="text-align:center; width:200px" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><input id="Sold" type="button" value="Sprzedane" class="btn btn-primary btn-lg" style="text-align:center; width:200px" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><input id="Bought" type="button" value="Kupione" class="btn btn-primary btn-lg" style="text-align:center; width:200px" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><input id="Licytation" type="button" value="Licytowane" class="btn btn-primary btn-lg" style="text-align:center; width:200px" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+
+    </div>
+
+    <div class="row" style=" padding-bottom: 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><input id="Logout" type="button" value="Wyloguj" class="btn btn-primary btn-lg" style="text-align:center; width:200px" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
