@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="DatabaseModel.Item">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdSeller" ColumnName="IdSeller" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DatabaseModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Boughts">
+      <EntityTypeMapping TypeName="DatabaseModel.Bought">
+        <MappingFragment StoreEntitySet="Bought">
+          <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+          <ScalarProperty Name="IdSeller" ColumnName="IdSeller" />
+          <ScalarProperty Name="NumberOfItems" ColumnName="NumberOfItems" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InProgresses">
+      <EntityTypeMapping TypeName="DatabaseModel.InProgress">
+        <MappingFragment StoreEntitySet="InProgress">
+          <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+          <ScalarProperty Name="ItemsLeft" ColumnName="ItemsLeft" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="PriceForOne" ColumnName="PriceForOne" />
+          <ScalarProperty Name="ActualPrice" ColumnName="ActualPrice" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
