@@ -30,8 +30,21 @@ namespace Alledrogo.Controllers
                     var IP = entities.InProgresses.Where(e => e.IdItem == id).FirstOrDefault();
                     var item = entities.Items.Where(e => e.Id == id).FirstOrDefault();
                     var userWhoSold = entities.Users.Where(e => e.Id == item.IdSeller).FirstOrDefault();
+                    string emailBefore = "";
+                  //  double pricebefore = 0;
+                    try { 
+                    var priceBefore = entities.InProgresses.Where(e => e.IdItem == id).FirstOrDefault();
+                       
+                    var userBefore = entities.Boughts.Where(e => e.IdItem == id && e.Price == priceBefore.ActualPrice).DefaultIfEmpty();
+                      //  pricebefore = Convert.ToDouble(priceBefore.ActualPrice);
+                        var UB = entities.Users.Where(e => e.Id == userBefore.FirstOrDefault().IdSeller).FirstOrDefault();
+                       emailBefore = UB.Email.ToString();
+                    }
+                    catch(Exception edsg) { }
 
-                   
+
+
+
                     DateTime date = DateTime.Now;
                     bought.Date = date;
                     bought.IdItem = IP.IdItem;
@@ -39,13 +52,32 @@ namespace Alledrogo.Controllers
                     bought.Type = IP.Type;
                     bought.NumberOfItems = Convert.ToInt32(bought.NumberOfItems);
                     bought.Price = Convert.ToDouble(bought.Price);
+
+                   
+
+                   // if (bought.Type.Equals("Licytacja") && !emailBefore.Equals(entity.Email))
+                   // {
+                  //      var EB = entities.Users.Where(e => e.Email.Equals(emailBefore)).FirstOrDefault();
+                   //     EB.Money = EB.Money + pricebefore;
+                  //      entity.Money = entity.Money - bought.Price;
+                  //  }
+
+                    if ((bought.Type.Equals("Licytacja") && (bought.Price != IP.PriceForOne)))
+                    {
+                        entity.Money = entity.Money - bought.Price;
+                    }
+
+                    if (bought.Type.Equals("Kup teraz"))
                     entity.Money = entity.Money - bought.Price;
-                    userWhoSold.Money = userWhoSold.Money - bought.Price;
+
+                    if (bought.Type.Equals("Kup teraz") || (bought.Type.Equals("Licytacja") && (bought.Price == IP.PriceForOne)))
+                        userWhoSold.Money = userWhoSold.Money + bought.Price;
+
                     entities.Boughts.Add(bought);
                     entities.SaveChanges();
 
                     var message = Request.CreateResponse(HttpStatusCode.Created, bought);
-
+                    if (bought.Type.Equals("Kup teraz")) { 
                     try { 
                         System.Net.Mail.SmtpClient client = new SmtpClient();
                        // client.UseDefaultCredentials = false;
@@ -86,7 +118,47 @@ namespace Alledrogo.Controllers
                     {
                         
                     }
+                    }
+                    else if (bought.Type.Equals("Licytacja"))
+                    {
+                        try
+                        {
+                            System.Net.Mail.SmtpClient client = new SmtpClient();
+                            client.Port = 587;
+                            client.Host = "smtp.gmail.com";
+                            client.EnableSsl = true;
+                            client.Timeout = 10000;
+                            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            client.UseDefaultCredentials = false;
+                            client.Credentials = new System.Net.NetworkCredential("ProjektAlledrogo@gmail.com", "wchujdrogo");
 
+                            MailMessage mm = new MailMessage("donotreply@domain.com", emailBefore, "Alledrogo - Nowa cena aukcji którą licytowałeś",
+                             "Została ustalona nowa cena przedmiot[y] '" + item.Title + "'. Id aukcji:" + item.Id + ". Nowa cena : " + bought.Price);
+                            mm.BodyEncoding = UTF8Encoding.UTF8;
+                            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+                            client.Send(mm);
+
+                            client.Port = 587;
+                            client.Host = "smtp.gmail.com";
+                            client.EnableSsl = true;
+                            client.Timeout = 10000;
+                            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            client.UseDefaultCredentials = false;
+                            client.Credentials = new System.Net.NetworkCredential("ProjektAlledrogo@gmail.com", "wchujdrogo");
+
+                            mm = new MailMessage("donotreply@domain.com", userWhoSold.Email, "Alledrogo - Nowa cena twojej aukcji",
+                             "Została ustalona nowa cena twojego przedmiot[y] '" + item.Title + "'. Id aukcji:" + item.Id + ". Nowa cena : " + bought.Price);
+                            mm.BodyEncoding = UTF8Encoding.UTF8;
+                            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+                            client.Send(mm);
+                        }
+                        catch (Exception gdgd)
+                        {
+
+                        }
+                    }
                     return message;
                 }
             }

@@ -11,6 +11,7 @@
         $(document).ready(function () {
 
             $('#login').click(function () {
+               
                 var username = $('#txtUsername').val();
                 var password = $('#txtPassword').val();
 
@@ -29,9 +30,12 @@
                     },
 
                     error: function (data, textStatus, xhr) {
+
                         alert("Niepoprawny login lub hasło");
+                        
                     }
                 });
+                
             });
         });
         window.onbeforeunload = null;

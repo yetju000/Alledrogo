@@ -82,6 +82,7 @@
                             document.getElementById("ItemsLeftCP").innerHTML = ActualPrice;
                             document.getElementById("AT").innerHTML = "Kwota: ";
                             document.getElementById("Left").innerHTML = "Cena aktualna :";
+                            document.getElementById("Uwaga").innerHTML = "Uwaga! Jeśli ktoś cie przelicytuje to nie odzyskasz swoich pieniedzy. Przelicytowanie siebie skutkuje tym samym.";
                             if (PriceForOne > 0) {
                                 document.getElementById("PriceForOneCW").innerHTML = PriceForOne;
                                 document.getElementById("Max").innerHTML = "Cena wykupu :";
@@ -206,7 +207,7 @@
                     }
 
                 }
-                else if ((AuctionType == "Licytacja") && (parseInt(money) > parseInt(HowManyIs)) && (idSeller != document.getElementById("idBuyer").innerHTML)) {
+                else if ((AuctionType == "Licytacja") && (parseInt(money) >= parseInt(HowManyIs)) && (idSeller != document.getElementById("idBuyer").innerHTML)) {
 
                     if ((HowManyWant == PriceForOne) && (PriceForOne != 0)) {
                         var bought = new Object();
@@ -293,6 +294,9 @@
                     }
 
                 }
+                else if (idSeller == document.getElementById("idBuyer").innerHTML) {
+                    alert("Nie można kupic swojego przedmiotu");
+                }
                 else {
                     alert("Niepoprawne dane");
                 }
@@ -378,6 +382,12 @@
 
         <div class="col-sm-4 col-md-5"></div>
         <div class="col-sm-4 col-md-4"><label id="AT"></label><input id="HowMany" type="text" class="form-control" /><input id="submit" type="button" class="btn btn-primary" value="Akceptuj" /></div>
+        <div class="col-sm-4 col-md-3"></div>
+    </div>
+    <div class="row" style=" padding-bottom 1%;">
+
+        <div class="col-sm-4 col-md-5"></div>
+        <div class="col-sm-4 col-md-4"><label id="Uwaga"></label></div>
         <div class="col-sm-4 col-md-3"></div>
     </div>
 

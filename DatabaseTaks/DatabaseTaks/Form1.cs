@@ -42,7 +42,7 @@ namespace DatabaseTaks
                 "LEFT JOIN Items as I ON I.ID = IP.IdItem "+
                 "LEFT JOIN Bought as B ON B.IdItem = I.Id "+
                 "LEFT JOIN Users as U ON B.IDSeller = U.ID "+
-                "WHERE EndDate < GetDATE() AND IP.type LIKE 'LICYTACJA'";
+                "WHERE EndDate > GetDATE() AND IP.type LIKE 'LICYTACJA'";
 
 
 
